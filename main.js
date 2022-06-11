@@ -8,10 +8,6 @@ require('dotenv').config({ path: path.resolve(__dirname, process.env.NODE_ENV ? 
 var express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const ipfsAPI = require('ipfs-api');
-const fs = require('fs');
-// .env file
-const ipfs = ipfsAPI(process.env.IPFS_GATEWAY, '5001', { protocol: 'http' })
 /**
  * MNEMONIC=""
 WEBSOCKET_URL=ws://testnet-rpc.orai.io // testnet ip
@@ -26,19 +22,6 @@ BACKEND_URL=https://testnet-aioracle-svr.orai.io
 //     })
 // })
 
-//Reading file from computer
-let testFile = fs.readFileSync('/home/ftu191/Pictures/test.png');
-//Creating buffer for ipfs function to add file to the system
-let testBuffer = new Buffer(testFile);
-
-//Addfile router for adding file a local file to the IPFS network without any local node
-
-    ipfs.files.add(testBuffer, function (err, file) {
-        if (err) {
-          console.log(err);
-        }
-        console.log(file)
-      })
 
 const network = {
     rpc: process.env.NETWORK_RPC || "https://testnet-rpc.orai.io",
